@@ -1,0 +1,66 @@
+﻿@model PagedList.IPagedList<Model.EntityFramework.THELOAI>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Quản lý thể loại";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section header{
+    QUẢN LÝ THỂ LOẠI
+}
+
+
+<div class="=row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                DANH SÁCH THỂ LOẠI
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Chức năng</th>
+                                <th>Tên thể loại</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                               <tr id="row_@item.IDTheLoai">
+                                    <td>
+                                        <a href="/Admin/TypeManager/UpdateType/@item.IDTheLoai">Sửa</a>
+                                        |
+                                        @Ajax.ActionLink("Xóa", "Delete", new { @id = item.IDTheLoai }, new AjaxOptions
+                                   {
+                                       Confirm = "Bạn có chắc chắn muốn xóa bản ghi?",
+                                       OnComplete = "$('#row_" + @item.IDTheLoai + "').fadeOut(300)",
+                                       HttpMethod = "Delete"
+
+                                   })
+                                    </td>
+                                    <td>
+                                        <a href="/Admin/TypeManager/UpdateType/@item.IDTheLoai">
+                                            @item.TenTheLoai
+
+                                        </a>
+                                   </td>
+                                   <td>@item.IDTheLoai</td>
+                                   <td>@item.TenTheLoai</td>
+                                   <td>@item.UrlRequire</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+</div>

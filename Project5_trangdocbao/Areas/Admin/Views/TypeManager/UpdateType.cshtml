@@ -1,0 +1,42 @@
+﻿@model Model.EntityFramework.THELOAI
+
+
+@{
+    ViewBag.Title = "UpdateType";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@section header{
+    CẬP NHẬT THỂ LOẠI
+}
+
+
+@using (Html.BeginForm("UpdateType", "TypeManager", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TenTheLoai)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TenTheLoai)
+            @Html.ValidationMessageFor(model => model.TenTheLoai)
+        </div>
+        <br />
+        <p>
+            <input type="submit" value="Update" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Quay lại", "Index")
+</div>
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@

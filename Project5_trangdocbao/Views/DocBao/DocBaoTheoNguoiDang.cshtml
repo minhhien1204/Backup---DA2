@@ -1,0 +1,61 @@
+﻿@model PagedList.IPagedList<Model.EntityFramework.BAIDANG>
+@using PagedList.Mvc;
+@{
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+    var postrelative = (List<Model.EntityFramework.BAIDANG>)ViewBag._k_relative;
+}
+
+<div class="content_bottom">
+    <div class="col-lg-8 col-md-8">
+        <!-- start content bottom left -->
+
+        <div class="content_bottom_left">
+            <div class="single_category wow fadeInDown">
+                @foreach (var item in Model)
+                {
+                    <div class="business_category_left wow fadeInDown animated">
+                        <ul class="fashion_catgnav">
+                            <li>
+                                <div class="catgimg2_container">
+                                    <a href="/Doc-bao/@item.UrlRequire-@item.IDBaiDang"><img alt="img" src="@item.AnhDaiDien"></a>
+                                </div>
+                                <h2 class="catg_titile"><a href="/Doc-bao/@item.UrlRequire-@item.IDBaiDang">  @item.TenBaiDang</a></h2>
+                            </li>
+                        </ul>
+                    </div>
+                }
+
+            </div>@Html.PagedListPager(Model, page => Url.Action("DocBaoTheoNguoiDang", new { page, @searchString = @ViewBag.searchstring }))
+        </div>
+    </div>
+
+
+
+    <div class="col-lg-4 col-md-4">
+        <div class="content_bottom_right">
+            <!-- start single bottom rightbar -->
+            <div class="single_bottom_rightbar">
+                <h2>BÀI XEM NHIỀU</h2>
+                <ul class="small_catg popular_catg wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
+                    @foreach (var item in postrelative)
+                    {
+                        <li>
+                            <div class="media wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
+                                <div class="img_post_right">
+                                    <a href="/doc-bao/@item.UrlRequire-@item.IDBaiDang" class="media-left">
+                                        <img alt="img" src="@item.AnhDaiDien">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a href="/doc-bao/@item.UrlRequire-@item.IDBaiDang"> @item.TenBaiDang</a></h4>
+                                    <p> @item.TieuDe</p>
+                                </div>
+                            </div>
+
+                        </li>}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>

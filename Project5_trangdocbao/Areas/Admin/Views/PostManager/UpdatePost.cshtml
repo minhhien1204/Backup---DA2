@@ -1,0 +1,141 @@
+﻿@model Model.EntityFramework.BAIDANG
+
+@{
+    ViewBag.Title = "UpdatePost";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+@section stylesheet{
+    <style>
+        .form-group {
+            margin-bottom: 10px !important;
+            clear: both;
+            min-height: 35px;
+            position: relative;
+            padding-bottom: 5px !important;
+        }
+
+
+
+        .form-control123 {
+            display: block;
+            width: 60%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            float: left;
+            margin-right: 10px;
+        }
+
+
+
+
+
+        .form-group1122 {
+            clear: both;
+            padding-top: 10px;
+            text-align: center;
+        }
+
+
+        #cke_txtnoidung {
+            margin-bottom: 10px;
+        }
+    </style>
+
+}
+
+
+
+
+
+
+@section header{
+    SOẠN BÀI ĐĂNG
+}
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+
+<fieldset>
+    @*Tao hidden de co IDbaiDang. lat submit form se co ID bai dang. giong nhu url hoi nay nho k Da*@
+    @Html.TextBoxFor(model => model.IDBaiDang, htmlAttributes: new { @class = "hidden" })
+    @*TÊN BÀI ĐĂNG___________________________________*@
+    <div class="form-group">
+        @Html.LabelFor(model => model.TenBaiDang, htmlAttributes: new { @class = "control-laber col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.TenBaiDang, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TenBaiDang, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    @*TIÊU ĐỀ BÀI ĐĂNG___________________________________*@
+    <div class="form-group">
+        @Html.LabelFor(model => model.TieuDe, htmlAttributes: new { @class = "control-laber col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.TieuDe, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TieuDe, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*ẢNH ĐẠI DIỆN___________________________________*@
+    <div class="form-group">
+        @Html.LabelFor(model => model.AnhDaiDien, htmlAttributes: new { @class = "control-laber col-md-2" })
+        <div class="col-md-10">
+
+            @Html.TextBoxFor(model => model.AnhDaiDien, new { @readonly = "readonly", @class = "form-control123", htmlAttributes = new { @class = "form-control", @readonly = "readonly" }, id = "txt_avt_post" })
+            <a id="btn_avt_post" href="#"> Chọn ảnh</a>
+            @Html.ValidationMessageFor(model => model.AnhDaiDien, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+
+
+
+    @*NỘI DUNG BÀI ĐĂNG___________________________________*@
+    <div class="form-group">
+        @Html.LabelFor(model => model.NoiDung, htmlAttributes: new { @class = "control-laber col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.NoiDung, new { htmlAttributes = new { @class = "form-control" }, id = "txtnoidung" })
+            @Html.ValidationMessageFor(model => model.NoiDung, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*CHỌN THỂ LOẠI__________________________________*@
+    <div class="form-group">
+        @Html.LabelFor(model => model.IDTheLoai, htmlAttributes: new { @class = "control-laber col-md-2" })
+        <div class="col-md-6">
+            @Html.DropDownListFor(model => model.IDTheLoai, null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.IDTheLoai, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group form-group1122">
+
+        <button type="submit" class="btn btn-default">UPDATE</button>
+    </div>
+</fieldset>
+}
+

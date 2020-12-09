@@ -1,0 +1,90 @@
+﻿@model Model.EntityFramework.TAIKHOAN
+@{
+    ViewBag.Title = "AccountInfo";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_User.cshtml";
+
+    var newsbyid = (List<Model.EntityFramework.TAIKHOAN>)ViewBag._k_news;
+}
+
+<h2>AccountInfo</h2>
+
+@section stylesheet{
+    <style>
+        .display-field {
+            color: #ff0000;
+            font-weight: bold;
+        }
+    </style>
+}
+
+
+
+@section header{
+    THÔNG TIN TÀI KHOẢN
+}
+
+<fieldset>
+    <legend>TAIKHOAN</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.TenTaiKhoan)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TenTaiKhoan, new { @class = "cl_12345" })
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.HoTen)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HoTen, new { @class = "cl_12345" })
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.NgaySinh)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NgaySinh, new { @class = "cl_12345" })
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.GioiTinh)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GioiTinh, new { @class = "cl_12345" })
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email, new { @class = "cl_12345" })
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.DiaChi)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DiaChi, new { @class = "cl_12345" })
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.SDT)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SDT, new { @class = "cl_12345" })
+    </div>
+
+    @*<div class="display-label">
+             @Html.DisplayNameFor(model => model.AnhDaiDien)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.AnhDaiDien)
+        </div>*@
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.TrangThaiNguoiDung)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TrangThaiNguoiDung, new { @class = "cl_12345" })
+    </div>
+</fieldset>

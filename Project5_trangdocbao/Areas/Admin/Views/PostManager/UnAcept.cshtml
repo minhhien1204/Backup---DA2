@@ -1,0 +1,110 @@
+﻿@{
+    Layout = null;
+    var newsbyid = (List<Model.EntityFramework.BAIDANG>)ViewBag._k_news;
+
+}
+
+
+@section pagetitle{
+    @foreach (var item in newsbyid)
+    {
+        <title>@item.TenBaiDang</title>
+    }
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+
+
+    <script src="/Assets/Client/js/JQueryV1.9.1.js"></script>
+
+    <link href="/Assets/Client/css/bootstrap.min.css" rel="stylesheet">
+    <!-- for fontawesome icon css file -->
+    <link href="/Assets/Client/css/font-awesome.min.css" rel="stylesheet">
+    <!-- for content animate css file -->
+    <link rel="/Assets/Client/stylesheet" href="css/animate.css">
+    <!-- google fonts  -->
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <!-- slick slider css file -->
+    <link href="/Assets/Client/css/slick.css" rel="stylesheet">
+    <!-- <link href="css/theme-red.css" rel="stylesheet"> -->
+    <link href="/Assets/Client/css/theme.css" rel="stylesheet">
+    <!-- main site css file -->
+    <link href="/Assets/Client/style.css" rel="stylesheet">
+
+
+
+    <style>
+        a.accept_Post {
+            font-size: 24px;
+            transition: all 300ms;
+            color: #0094ff;
+            font-weight: 600;
+            padding: 10px 30px 10px 30px;
+            border: 1px solid;
+        }
+
+            a.accept_Post:hover {
+                background-color: #0094ff;
+                color: #FFF;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="col-lg-8 col-lg-8-offset-2 col-md-8 col-md-8-offset-2">
+            <!-- start content bottom left -->
+            <div class="content_bottom_left">
+                <div class="single_page_area">
+                    @foreach (var item in newsbyid)
+                    {
+                        <h3 class="post_titile post_titile12"> @item.TenBaiDang </h3>
+                        <div class="single_page_content">
+
+
+                            <div class="post_commentbox">
+                                <span>
+                                    <i class="fa fa-calendar"></i>@item.NgayDang
+                                </span>
+                            </div>
+
+                            <h4> @item.TieuDe</h4>
+
+                            @Html.Raw(@item.NoiDung)
+
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8 col-lg-8-offset-2 col-md-8 col-md-8-offset-2" style="margin-bottom: 100px">
+            <center>
+                @*@foreach (var item in newsbyid)
+                    {
+                        @Html.ActionLink("DUYỆT BÀI ĐĂNG NÀY", "DuyetBai", "PostManager", new {id=@item.IDBaiDang,@class = "accept_Post", @title = "Duyệt bài đăng này", area = "Admin" })
+                    }*@
+
+
+                @foreach (var item in newsbyid)
+                {
+                    @Ajax.ActionLink("Bỏ duyệt bài đăng này", "BoDuyetBai", new { @id = item.IDBaiDang }, new AjaxOptions
+                           {
+                               Confirm = "Bạn có chắc chắn muốn bỏ duyệt bải đăng này?",
+                               OnComplete = "",
+                               HttpMethod = "Post"
+                           }, new { id = @item.IDBaiDang, @class = "accept_Post", @title = "Bỏ duyệt bài đăng này", area = "Admin" })
+                }
+
+            </center>
+        </div>
+        <
+    </div>
+
+</body>
+</html>

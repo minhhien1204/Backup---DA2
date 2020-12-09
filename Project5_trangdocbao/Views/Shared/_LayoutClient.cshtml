@@ -1,0 +1,225 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    @*<title></title>*@
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <!-- Bootstrap -->
+    @RenderSection("pagetitle", required: false)
+
+
+
+    <script src="/Assets/Client/js/JQueryV1.9.1.js"></script>
+
+    <link href="/Assets/Client/css/bootstrap.min.css" rel="stylesheet">
+    <!-- for fontawesome icon css file -->
+    <link href="/Assets/Client/css/font-awesome.min.css" rel="stylesheet">
+    <!-- for content animate css file -->
+    <link rel="/Assets/Client/stylesheet" href="css/animate.css">
+    <!-- google fonts  -->
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <!-- slick slider css file -->
+    <link href="/Assets/Client/css/slick.css" rel="stylesheet">
+    <!-- <link href="css/theme-red.css" rel="stylesheet"> -->
+    <link href="/Assets/Client/css/theme.css" rel="stylesheet">
+    <!-- main site css file -->
+    <link href="/Assets/Client/style.css" rel="stylesheet">
+    <link href="~/Assets/Client/js/jquery-ui.css" rel="stylesheet" />
+
+
+
+</head>
+<body>
+
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+    </div>
+
+
+    <a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
+
+    <div class="container">
+
+
+
+        <!-- start header area -->
+        <header id="header">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <!-- start header bottom -->
+                    <div class="header_bottom">
+                        <div class="header_bottom_left">
+                            <a class="logo" href="/">
+                                TinTuc<strong>Online</strong> <span style="font-family: Arial;">TIN TỨC ONLINE</span>
+                            </a>
+                        </div>
+
+                        <div class="header_top_right">
+                            <form class="search_form" action="/home/TimKiemBaiViet" method="get">
+                                <input type="search" class="form-control" placeholder="Tìm kiếm Tin Tức Online..." id="txtTimKiem" name="KeyWord">
+                                <button type="submit" class="glyphicon glyphicon-search submit" aria-hidden="true"></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header><!-- End header area -->
+        <!-- Static navbar -->
+        <div id="navarea">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    @{Html.RenderAction("MainMenu", "Home");}
+
+                </div><!--/.container-fluid -->
+            </nav>
+        </div>
+        <!-- start site main content -->
+        <section id="mainContent">
+
+            @RenderBody()
+            <!-- start main content top -->
+
+        </section>
+    </div>
+
+    <!--Footer-->
+    <div class="ngangxam"></div>
+
+    <footer class="footer-distributed">
+        <div class="footer-left">
+            <p class="footer-links">
+
+                <a class="link" href="#">TRANG CHỦ</a>
+
+                <a class="link" href="#">FEEDBACK</a>
+
+                <a class="link" href="/Home/Register/">ĐĂNG KÍ</a>
+
+                <a class="link" href="/Dang-Nhap/">ĐĂNG NHẬP</a>
+            </p>
+
+            <p class="footer-company-name">Tin tức Online © 2020</p>
+        </div>
+
+        <div class="footer-center">
+
+            <div>
+                <i class="fa fa-map-marker"></i>
+                <p><span>Nguyễn Văn Cừ nối dài</span> thành phố Cần Thơ</p>
+            </div>
+
+            <div>
+                <i class="fa fa-phone"></i>
+                <p>+84.999.888.999</p>
+            </div>
+
+            <div>
+                <i class="fa fa-envelope"></i>
+                <p><a href="mailto:lhp99cantho@gmail.com">support@tintuconline.com</a></p>
+            </div>
+
+        </div>
+
+        <div class="footer-right">
+
+            <p class="footer-company-about">
+                <span>TinTucOnline</span>
+                Mang đến những tin tức mới nhất và nhanh nhất mỗi ngày.
+            </p>
+
+            <div class="footer-icons">
+
+                <div class="hover">
+                    <span>Kết nối với chúng tôi</span>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!--Footer-->
+
+
+
+
+    <script src="/Assets/Client/js/JQueryV1.9.1.js"></script>
+    <!-- jQuery google CDN Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- For content animatin  -->
+    <script src="/Assets/Client/js/wow.min.js"></script>
+    <!-- bootstrap js file -->
+    <script src="/Assets/Client/js/bootstrap.min.js"></script>
+    <!-- slick slider js file -->
+    <script src="/Assets/Client/js/slick.min.js"></script>
+
+    <!-- custom js file include -->
+    <script src="/Assets/Client/js/custom.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        var common = {
+            init: function () {
+                common.registerEvent();
+            },
+            registerEvent: function () {
+                $("#txtTimKiem").autocomplete({
+                    minLength: 0,
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "/Home/DanhSachTenBaiViet",
+                            dataType: "json",
+                            data: {
+                                term: request.term
+                            },
+                            success: function (res) {
+                                response(res.data);
+                            }
+                        });
+                    },
+                    focus: function (event, ui) {
+                        $("#txtTimKiem").val(ui.item.label);
+                        return false;
+                    },
+                    select: function (event, ui) {
+                        $("#txtTimKiem").val(ui.item.label);
+                        return false;
+                    }
+                })
+                    .autocomplete("instance")._renderItem = function (ul, item) {
+                        return $("<li>")
+                            .append("<div>" + item.label + "</div>")
+                            .appendTo(ul);
+                    };
+            }
+        }
+        common.init();
+    </script>
+    <script src="/Assets/Admin/plugins/ckfinder/ckfinder.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btn_avt_post').click(function (e) {
+                e.preventDefault();
+                var finder = new CKFinder();
+                finder.selectActionFunction = function (urlimage) {
+                    $('#txt_avt_post').val(urlimage);
+                };
+                finder.popup();
+            });
+           
+        });
+
+    </script>
+</body>
+</html>

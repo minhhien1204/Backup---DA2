@@ -1,0 +1,102 @@
+﻿@model Model.EntityFramework.TAIKHOAN
+
+@{
+    ViewBag.Title = "AccountInfo";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+
+
+    var newsbyid = (List<Model.EntityFramework.TAIKHOAN>)ViewBag._k_news;
+}
+
+@section stylesheet{
+    <style>
+        .display-field {
+            color: #ff0000;
+            font-weight: bold;
+        }
+    </style>
+}
+
+
+
+@section header{
+    THÔNG TIN TÀI KHOẢN
+}
+
+<fieldset>
+    <legend>TAIKHOAN</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.TenTaiKhoan)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TenTaiKhoan, new { @class = "cl_12345" })
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.HoTen)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HoTen, new { @class = "cl_12345" })
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.NgaySinh)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NgaySinh, new { @class = "cl_12345" })
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.GioiTinh)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GioiTinh, new { @class = "cl_12345" })
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email, new { @class = "cl_12345" })
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.DiaChi)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DiaChi, new { @class = "cl_12345" })
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.SDT)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SDT, new { @class = "cl_12345" })
+    </div>
+
+    @*<div class="display-label">
+             @Html.DisplayNameFor(model => model.AnhDaiDien)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.AnhDaiDien)
+        </div>*@
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.TrangThaiNguoiDung)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TrangThaiNguoiDung, new { @class = "cl_12345" })
+    </div>
+</fieldset>
+<p>
+    @foreach (var item in newsbyid)
+    {
+        @Ajax.ActionLink("Khóa tài khoản này", "BlockAccount", new { @id = item.IDTaiKhoan }, new AjaxOptions
+                           {
+                               Confirm = "Bạn có chắc chắn muốn khóa tài khoản này?",
+                               OnComplete = "",
+                               HttpMethod = "Post"
+                           }, new { id = @item.IDTaiKhoan, @class = "accept_Post", @title = "Khóa tài khoản này", area = "Admin" })
+    }
+    @Html.ActionLink("Back to List", "Index")
+</p>

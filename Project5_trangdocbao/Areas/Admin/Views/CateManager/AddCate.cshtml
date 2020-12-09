@@ -1,0 +1,45 @@
+﻿@model Model.EntityFramework.CHUYENMUC
+
+@{
+    ViewBag.Title = "AddCate";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>AddCate</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>CHUYENMUC</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IDCMCha)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IDCMCha)
+            @Html.ValidationMessageFor(model => model.IDCMCha)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TenCM)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TenCM)
+            @Html.ValidationMessageFor(model => model.TenCM)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Link)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Link)
+            @Html.ValidationMessageFor(model => model.Link)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
